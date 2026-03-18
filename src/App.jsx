@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+// Changed BrowserRouter to HashRouter for better GH Pages compatibility
+import { HashRouter as Router, Routes, Route } from 'react-router-dom' 
 import NavMenu from './NavMenu'
 import ScpDetail from './ScpDetail'
 import ScpFiles from './ScpFiles'
@@ -24,7 +25,8 @@ const SecurityGate = ({ onVerify }) => {
       }, 30)
     } else if (!isScanning && progress > 0 && !isAuthorized) {
       timer.current = setInterval(() => {
-        setProgress(p => Math.highest(0, p - 5))
+        // Changed Math.highest to Math.max
+        setProgress(p => Math.max(0, p - 5)) 
       }, 20)
     }
     return () => clearInterval(timer.current)
@@ -42,9 +44,9 @@ const SecurityGate = ({ onVerify }) => {
           onMouseUp={() => setIsScanning(false)}
           onMouseLeave={() => setIsScanning(false)}
         >
-          {/* Thumbprint image is always rendered */}
+          {/* Use relative path for the image */}
           <img
-            src="/images/ThumbPrint.png"
+            src="images/ThumbPrint.png" 
             className="fingerprint-image"
             alt="Scanner"
           />
@@ -65,6 +67,7 @@ export default function App() {
 
   if (!isAuthenticated) return <SecurityGate onVerify={() => setIsAuthenticated(true)} />
 
+  // Note: basename is not required when using HashRouter
   return (
     <Router>
       <div className="app-container">

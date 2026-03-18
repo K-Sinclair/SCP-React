@@ -5,6 +5,12 @@ const ScpDetail = () => {
   const { id } = useParams()
   const item = scp.find((scpItem) => scpItem.id === id)
 
+  const imagePath = item.image.startsWith('/') 
+  ? `${import.meta.env.BASE_URL}${item.image.slice(1)}` 
+  : `${import.meta.env.BASE_URL}${item.image}`;
+
+    <img src={imagePath} alt={item.item} />
+
   if (!item) return <div className="scp-card">Access Denied: Invalid ID</div>
 
   // Dynamic class for the badge
