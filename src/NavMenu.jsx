@@ -15,7 +15,7 @@ export default function NavMenu() {
           [ HOME ]
         </Link>
         <Link to="/scp" className={location.pathname === '/scp' ? 'active' : ''}>
-          [ ALL SCP ]
+          [ SCP ARCHIVE ]
         </Link>
         {scp.map((item) => (
           <Link 
